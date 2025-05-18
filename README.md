@@ -1,7 +1,7 @@
 # Embedded Event Manager \(EEM\)
 
-EEM's are pretty cool! And, I hope that this repository saves you (and my future self) lot's of time.    
-Because, I found EEM documentation to be a special kind of aweful.    
+I hope that this repository saves you lot's of time.    
+Because, I found EEM documentation to be a special kind of awful.    
 Hand's down, the best resource is piecing things together from Cisco Community Forum posts.    
 I will provide links at the end to the resources that were most beneficial to me on this journey.   
 
