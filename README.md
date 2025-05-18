@@ -5,7 +5,7 @@ Because, I found EEM documentation to be a special kind of awful.
 Hand's down, the best resource is piecing things together from Cisco Community Forum posts.    
 I will provide links at the end to the resources that were most beneficial to me on this journey.   
 
-:warning:<ins>Caveats & Warnings</ins>:warning:\:     
+:warning:<ins>Caveats & Warnings</ins>:warning:     
 - EEM's and AAA can be made to work together, but your `aaa new-model` is likely *not* configured for it.     
    - The guaranteed method is to configure your applets with `authorization bypass`.     
 - If you are using [IOS.sh](https://github.com/plmcdowe/Cisco-and-Bash):
@@ -33,8 +33,8 @@ The specifics of each release are too much to cover now, but can be read in enti
    - *:exclamation: Using TCL in EEM 4.0 is recommended over TCL.sh scripts, which uses no longer updated TCL versions.*    
       It is possible to still use TCL.sh safely and effectively,     
       you just need to ensure that you reference sufficiently old documentation.    
-   - TCL is written directly within an applet with `action` steps.    
-   
+   - TCL is written directly in an applet under `action` steps.    
+
 - **EEM Policy** `(config)#event manager policy PolicyFile.tcl`**:**    
    - Unlike applets, policies reference a TCL file stored in the device.    
    - You have to register the user policy directory that contains `.tcl` policy files with event manager server.     
