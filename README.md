@@ -8,6 +8,7 @@ I will provide links at the end to the resources that were most beneficial to me
 :warning:<ins>Caveats & Warnings</ins>:warning:     
 > EEM's and AAA can be made to work together, but your `aaa new-model` is likely *not* configured for it.     
 >> The guaranteed method is to configure your applets with `authorization bypass`.     
+>>
 > If you are using [IOS.sh](https://github.com/plmcdowe/Cisco-and-Bash):    
 >> ***:exclamation: Do not attempt to run a function from within an EEM applet. :exclamation:***     
 >>> There's methods for triggering shell functions from EEM detectors, but ***`action cli` is not it.***    
