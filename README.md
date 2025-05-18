@@ -1,1 +1,39 @@
-# Cisco-and-EEM
+# Embedded Event Manager \(EEM\)
+
+EEM's are pretty cool! And, I hope that this repository saves you (and my future self) lot's of time.    
+Because, I found EEM documentation to be a special kind of aweful.    
+Hand's down, the best resource is piecing things together from Cisco Community Forum posts.    
+I will provide links at the end to the resources that were most beneficial to me on this journey.   
+
+:warning<ins>Caveats & Warnings</ins>:warning:\:     
+- EEM's and AAA can be made to work together, but your `aaa new-model` is likely *not* configured for it.     
+   - The guaranteed method is to configure your applets with `authorization bypass`.     
+- If you are using [IOS.sh](https://github.com/plmcdowe/Cisco-and-Bash):
+   - *:exclamation: Do not attempt to run a function from within an EEM applet.*     
+      - There's methods for triggering shell functions from EEM detectors, but `action cli` is not it.    
+   - EEM built-in variables, such as `$_cli_username`, must have the "$" escaped: ``$_cli_username`.    
+- If your device's IOS version is >= 17, then your EEM version should be the latest (4.0).
+   - You can confirm with: `sh event manager version`    
+
+
+Additional notes before examples:     
+EEM ranges from version 1.0, - 4.0 with sub-releases.    
+The specifics are too much to cover here, but can be read in entirety [here](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/syst-mgmt/b-system-management/m_eem-overview.html).     
+*EEM Applet* and *EEM Policy*, *TCL.sh* and *IOS.sh*, **and** *TCL in EEM Applets*. They're different, but related..    
+If you aren't familiar, TCL is Tool Control Language, and is deserving of its own ReadMe. But, I will cover some basics and provide references.    
+- **EEM Applet** `(config)#event manager applet AppletName`**:**    
+   - Applets are the focus of this ReadMe.    
+   - EEM 4.0 Applets use a TCL patch 8.3.4. You can confirm from CLI within the TCL shell:    
+      ```
+      #tclsh
+      (tcl)#info patchlevel
+      ```
+   - :exclamation: Using TCL in 4.0 applets is the recommended method, over TCL.sh scripts, which is an older TCL version that is no longer being updated.    
+      It is possible to still use TCL.sh safely and effectively, you just need to ensure that you reference sufficiently old documentation.    
+   - TCL is written directly within an applet with `action` steps.    
+- **EEM Policy** `(config)#event manager policy PolicyFile.tcl`**:**    
+   - Unlike applets, policies reference a TCL file stored in the device.    
+   - You have to register the user policy directory that contains `.tcl` policy files with event manager server.     
+   - Then, configure your event manager policy much like an applet.    
+
+
