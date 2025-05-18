@@ -20,8 +20,9 @@ I will provide links at the end to the resources that were most beneficial to me
 EEM ranges from version 1.0 - 4.0, with sub-releases.    
 The specifics of each release are too much to cover now, but can be read in entirety [here](https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/syst-mgmt/b-system-management/m_eem-overview.html).     
 *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*, **and** *"TCL in EEM Applets"*. They're different, but related..    
-<sup>If you aren't familiar, TCL is Tool Control Language, and is deserving of its own ReadMe.</sup>    
-<sup>But, I will cover some basics later and provide references at the end.</sup>    
+> <sub>If you aren't familiar, TCL is Tool Control Language, and is deserving of its own ReadMe.</sub>    
+> <sup>But, I will cover some basics later and provide references at the end.</sup>    
+
 - **EEM Applet** `(config)#event manager applet AppletName`**:**    
    - Applets are the focus of this ReadMe.    
    - EEM 4.0 Applets use a TCL patch 8.3.4. You can confirm from CLI within the TCL shell:    
