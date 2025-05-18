@@ -30,9 +30,11 @@ The specifics of each release are too much to cover now, but can be read in enti
       #tclsh
       (tcl)#info patchlevel
       ```
-   - *:exclamation: Using TCL in 4.0 applets is the recommended method, over TCL.sh scripts, which is an older TCL version that is no longer being updated.*    
-      It is possible to still use TCL.sh safely and effectively, you just need to ensure that you reference sufficiently old documentation.    
+   - *:exclamation: Using TCL in EEM 4.0 is recommended over TCL.sh scripts, which uses no longer updated TCL versions.*    
+      It is possible to still use TCL.sh safely and effectively,     
+      you just need to ensure that you reference sufficiently old documentation.    
    - TCL is written directly within an applet with `action` steps.    
+   
 - **EEM Policy** `(config)#event manager policy PolicyFile.tcl`**:**    
    - Unlike applets, policies reference a TCL file stored in the device.    
    - You have to register the user policy directory that contains `.tcl` policy files with event manager server.     
