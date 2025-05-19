@@ -38,7 +38,9 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 >> ```
 >>
 > *:exclamation: Using TCL in EEM 4.0 is recommended over TCL.sh scripts, which uses no longer updated TCL versions.*    
->> It is possible to still use TCL.sh safely and effectively, just ensure that you reference sufficiently old documentation.    
+>> It is possible to still use TCL.sh safely and effectively,     
+>> just ensure that you reference sufficiently old documentation.    
+> 
 > TCL is written directly in an applet under `action` steps.    
 
 **EEM Policy** `(config)#event manager policy PolicyFile.tcl`**:**    
