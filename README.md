@@ -18,6 +18,7 @@ EEM built-in variables, such as `$_cli_username`, must have the *$* escaped: `\$
     
 If your device's IOS version is >= 17, then your EEM version should be the latest (4.0).    
 > You can confirm with: `sh event manager version`        
+---    
 
 <ins>Additional notes before examples</ins>:     
 
