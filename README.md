@@ -13,8 +13,8 @@ EEM's and AAA can be made to work together, but your `aaa new-model` is likely *
 If you are using [IOS.sh](https://github.com/plmcdowe/Cisco-and-Bash):    
 > ***:exclamation: Do not attempt to run a function from within an EEM applet. :exclamation:***     
 >> There's methods for triggering shell functions from EEM detectors, but ***`action cli` is not it.***    
- 
-EEM built-in variables, such as `$_cli_username`, must have the *$* escaped: `\$_cli_username`.    
+>>  
+> EEM built-in variables, such as `$_cli_username`, must have the *$* escaped: `\$_cli_username`.    
     
 If your device's IOS version is >= 17, then your EEM version should be the latest (4.0).    
 > You can confirm with: `sh event manager version`        
