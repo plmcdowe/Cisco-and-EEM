@@ -47,4 +47,6 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 > Unlike applets, policies reference a TCL file stored in the device.    
 > You have to register the user policy directory that contains `.tcl` policy files with event manager server.     
 > Then, configure your event manager policy much like an applet.    
+---    
 
+###
