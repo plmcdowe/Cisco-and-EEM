@@ -1,0 +1,1590 @@
+
+Switch#term width 512
+Switch#term len 0
+Switch#sh event manager detector all detail
+No.  Name                Version   Node        Type    
+1    application         01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_appl 
+                 [tag <tag-val>] 
+                 sub_system <sub-system-id> 
+                 type <event-type> 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}] 
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        sub_system 
+        type 
+        data1 
+        data2 
+        data3 
+        data4 
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] application 
+                 sub-system <sub-system-id> 
+                 type <event-type> 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_application_sub_system 
+        $_application_type 
+        $_application_data1 
+        $_application_data2 
+        $_application_data3 
+        $_application_data4 
+
+2    rf                  01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_rf 
+                 [tag <tag-val>] 
+                 event <rf-event-val> 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        event 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] rf 
+                 event <rf-event-val> 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_rf_event 
+
+3    identity            01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_identity 
+                 [tag <tag-val>] 
+                 interface <interface-name> 
+                 [authc {success | fail | all}] 
+                 [authz {success | fail | all}] 
+                 [authz-complete] 
+                 [aaa-attribute <attribute-name>] 
+                 [mac-address <mac-address>] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        stage 
+        status 
+        interface 
+        mac 
+        <attribute> 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] identity 
+                 interface {<interface> | regexp <interface-pattern>} 
+                 [authc {success | fail | all}] 
+                 [authz {success | fail | all}] 
+                 [authz-complete] 
+                 [aaa-attribute <attribute-name>] 
+                 [mac-address <mac-address>] 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_identity_stage 
+        $_identity_status 
+        $_identity_interface 
+        $_identity_mac 
+        $_identity_<attribute> 
+
+4    mat                 01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_mat 
+                 [tag <tag-val>] 
+                 interface <interface-name> 
+                 [mac_address <mac-address>] 
+                 [type {add | delete}] 
+                 [hold_down <sec.msec>] 
+                 [use_mat_db {yes | no}] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        notification 
+        intf_name 
+        mac_address 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] mat 
+                 interface {<interface> | regexp <interface-pattern>} 
+                 [mac-address <mac-address>] 
+                 [type {add | delete}] 
+                 [hold-down <sec.msec>] 
+                 [use-mat-db {yes | no}] 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_mat_notification 
+        $_mat_intf_name 
+        $_mat_mac_address 
+
+5    neighbor-discovery  01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_neighbor_discovery 
+                 [tag <tag-val>] 
+                 interface <interface-pattern> 
+                 [cdp {add | update | delete | all}] 
+                 [lldp {add | update | delete | all}]
+                 [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
+                 [line-event {up|down|all}] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        COMMON VARIABLES: 
+        notification 
+        intf_linkstatus 
+        intf_linestatus 
+        local_intf_name 
+        short_local_intf_name 
+        port_id 
+        CDP EVENT VARIABLES: 
+        protocol 
+        proto_notif 
+        proto_new_entry 
+        cdp_entry_name 
+        cdp_hold_time 
+        cdp_mgmt_domain 
+        cdp_platform 
+        cdp_version 
+        cdp_capabilities_string 
+        cdp_capabilities_bits 
+        cdp_capabilities_bits_[0-31] 
+        LLDP EVENT VARIABLES: 
+        protocol 
+        proto_notif 
+        proto_new_entry 
+        lldp_chassis_id 
+        lldp_system_name 
+        lldp_system_description 
+        lldp_ttl 
+        lldp_port_description 
+        lldp_system_capabilities_string 
+        lldp_enabled_capabilities_string 
+        lldp_system_capabilities_bits 
+        lldp_enabled_capabilities_bits 
+        lldp_capabilities_bits 
+        lldp_capabilities_bit_[0-31] 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] neighbor-discovery 
+                 interface {<interface> | regexp <interface-pattern>} 
+                 [cdp {add | update | delete | all}] 
+                 [lldp {add | update | delete | all}] 
+                 [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
+                 [line-event {up|down|all}] 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        COMMON VARIABLES: 
+        $_nd_notification 
+        $_nd_intf_linkstatus 
+        $_nd_intf_linestatus 
+        $_nd_local_intf_name 
+        $_nd_short_local_intf_name 
+        $_nd_port_id 
+        CDP EVENT VARIABLES: 
+        $_nd_protocol 
+        $_nd_proto_notif 
+        $_nd_proto_new_entry 
+        $_nd_cdp_entry_name 
+        $_nd_cdp_hold_time 
+        $_nd_cdp_mgmt_domain 
+        $_nd_cdp_platform 
+        $_nd_cdp_version 
+        $_nd_cdp_capabilities_string 
+        $_nd_cdp_capabilities_bits 
+        $_nd_cdp_capabilities_bits_[0-31] 
+        LLDP EVENT VARIABLES: 
+        $_nd_protocol 
+        $_nd_proto_notif 
+        $_nd_proto_new_entry 
+        $_nd_lldp_chassis_id 
+        $_nd_lldp_system_name 
+        $_nd_lldp_system_description 
+        $_nd_lldp_ttl 
+        $_nd_lldp_port_description 
+        $_nd_lldp_system_capabilities_string 
+        $_nd_lldp_enabled_capabilities_string 
+        $_nd_lldp_system_capabilities_bits 
+        $_nd_lldp_enabled_capabilities_bits 
+        $_nd_lldp_capabilities_bits 
+        $_nd_lldp_capabilities_bit_[0-31] 
+
+6    generic-xed         01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+
+        Tcl event_reqinfo Array Names: 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] <xed_event> 
+                 [parameter <parameter-name> value <value> ]*
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_generic_msg 
+        $_generic_priority 
+
+7    syslog              01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_syslog
+                 [tag <tag-val>] 
+                 [pattern <pattern-val>] 
+                 [sequence <sequence-val>] 
+                 [timestamp <timestamp-val>] 
+                 [facility <facility-val>] 
+                 [mnemonic <mnemonic-val>] 
+                 [occurs <occurs-val>]
+                 [period <period-val>]
+                 [priority {all | emergencies | alerts | critical | 
+                            errors | warnings | notifications | 
+                            informational | debugging}]
+                 [severity_fatal]
+                 [severity_critical]
+                 [severity_major]
+                 [severity_minor]
+                 [severity_warning]
+                 [severity_notification]
+                 [severity_normal]
+                 [severity_debugging]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        msg 
+        priority 
+        sequence 
+        timestamp 
+        facility 
+        mnemonic 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] syslog 
+                 [pattern <pattern-val>] 
+                 [sequence <sequence-val>] 
+                 [timestamp <timestamp-val>] 
+                 [facility <facility-val>] 
+                 [mnemonic <mnemonic-val>] 
+                 [occurs <occurs-val>]
+                 [period <period-val>]
+                 [priority {all | emergencies | alerts | critical | 
+                            errors | warnings | notifications | 
+                            informational | debugging}]
+                 [severity-fatal]
+                 [severity-critical]
+                 [severity-major]
+                 [severity-minor]
+                 [severity-warning]
+                 [severity-notification]
+                 [severity-normal]
+                 [severity-debugging]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_syslog_msg 
+        $_syslog_priority 
+        $_syslog_sequence 
+        $_syslog_timestamp 
+        $_syslog_facility 
+        $_syslog_mnemonic 
+
+8    generic             01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+
+        Tcl event_reqinfo Array Names: 
+
+        Applet Configuration Syntax: 
+
+        Applet Built-in Environment Variables: 
+
+9    nhrp                01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_nhrp
+                 [tag <tag-val>] 
+                 [occurs <occurs-val>]
+                 [period <period-val>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>] [nice {0 | 1}] 
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        msg 
+
+        Applet Configuration Syntax: 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_nhrp_msg 
+        $_nhrp_argc 
+        $_nhrp_arg0 
+        $_nhrp_arg1 
+        $_nhrp_arg2 
+        $_nhrp_arg3 
+        $_nhrp_arg4 
+        $_nhrp_arg5 
+        $_nhrp_arg6 
+        $_nhrp_attribute
+
+10   routing             03.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_routing
+                 [tag <tag-val>] 
+                 network <network>/<length> 
+                 [ge <ge-length>]
+                 [le <le-length>]
+                 [ne <ne-length>]
+                 [type {add | remove | modify | all}]
+                 [protocol <protocol-val>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [vrf {all | default | name=regex}]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        network 
+        mask 
+        prefix_len 
+        protocol 
+        type 
+        lastgateway 
+        distance 
+        time 
+        time_sec 
+        time_msec 
+        metric 
+        afi 
+        lastinterface 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] routing 
+                 network <network>/<length> 
+                 [ge <ge-length>]
+                 [le <le-length>]
+                 [ne <ne-length>]
+                 [type {add | remove | modify | all}]
+                 [protocol <protocol-val>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [vrf {all | default | name <regex>}]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_routing_network 
+        $_routing_mask 
+        $_routing_prefix_len 
+        $_routing_protocol 
+        $_routing_type 
+        $_routing_tag_name 
+        $_routing_vrf_name 
+        $_routing_topo_name 
+        $_routing_lastgateway 
+        $_routing_distance 
+        $_routing_time 
+        $_routing_time_sec 
+        $_routing_time_msec 
+        $_routing_metric 
+        $_routing_lastinterface 
+        $_routing_afi 
+
+11   test                01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+          N/A 
+
+        Tcl event_reqinfo Array Names: 
+          N/A 
+
+        Applet Configuration Syntax: 
+          N/A 
+
+        Applet Built-in Environment Variables: 
+          N/A 
+
+12   config              01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_config 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] configuration 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+
+13   env                 01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+          N/A  
+
+        Tcl event_reqinfo Array Names: 
+          N/A  
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] environmental 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+          N/A  
+
+14   ds                  01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+          N/A 
+
+        Tcl event_reqinfo Array Names: 
+          N/A 
+
+        Applet Configuration Syntax: 
+          N/A 
+
+        Applet Built-in Environment Variables: 
+          N/A 
+
+15   crash               01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+          N/A 
+
+        Tcl event_reqinfo Array Names: 
+          N/A 
+
+        Applet Configuration Syntax: 
+          N/A 
+
+        Applet Built-in Environment Variables: 
+          N/A 
+
+16   gold                01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_gold 
+                 [tag <tag-val>] 
+                 card <card-val> 
+                 [sub_card <sub-card-val>] 
+                 [new_failure {true | false}] 
+                 [action_notify {true | false}] 
+                 [testing_type {normal | bootup | ondemand | 
+                                schedule | monitoring}] 
+                 [event_type {threshold_reached | threshold_exceeded}] 
+                 [test_name <name-value>] 
+                 [test_id <test-id-value>] 
+                 [consecutive_failure <value>] 
+                 [platform_action <value>] 
+                 [severity-major] 
+                 [severity-minor] 
+                 [severity-normal] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        card
+        sub_card
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] gold 
+                 card <card-val> 
+                 [sub-card <sub-card-val>] 
+                 [new-failure {true | false}] 
+                 [severity-major] 
+                 [severity-minor] 
+                 [severity-normal] 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_gold_card
+        $_gold_sub_card
+
+17   cli                 01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_cli 
+                 [tag <tag-val>] 
+                 pattern <pattern-val> 
+                 [enter] [questionmark] [tab] 
+                 sync {yes | no} skip {yes | no} 
+                 verifyprc {yes | no}
+                 [occurs <occurs-val>] 
+                 [period <sec.msec>]
+                 [default <sec.msec>]
+                 [mode <parser mode val>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}] 
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        msg 
+        msg_count 
+        line 
+        key 
+        tty 
+        username 
+        host 
+        privilege 
+        error_code 
+        mode_context 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] cli 
+                 pattern <pattern-val> 
+                 [enter] [questionmark] [tab] 
+                 sync {yes | no}
+                 skip {yes | no}
+                 verifyprc {yes | no}
+                 [occurs <occurs-val>]
+                 [period <sec.msec>]
+                 [default <sec.msec>]
+                 [mode <parser mode val>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_cli_msg 
+        $_cli_msg_count 
+        $_cli_line 
+        $_cli_key 
+        $_cli_tty 
+        $_cli_username 
+        $_cli_host 
+        $_cli_privilege 
+        $_cli_error_code
+        $_cli_mode_context
+
+18   counter             01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_counter 
+                 [tag <tag-val>] 
+                 name <counter-name>
+                 entry_val <entry-val>
+                 entry_op {gt | ge | eq | ne | lt | le}
+                 exit_val <exit-val>
+                 exit_op {gt | ge | eq | ne | lt | le}
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        name 
+        value 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] counter 
+                 name <counter-name> 
+                 entry-val <entry-val>
+                 entry-op {gt | ge | eq | ne | lt | le}
+                 exit-val <exit-val>
+                 exit-op {gt | ge | eq | ne | lt | le}
+                 [maxrun <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_counter_name 
+        $_counter_value 
+
+19   interface           01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_interface 
+                 [tag <tag-val>] 
+                 name <interface-name>
+                 parameter <counter-name>
+                 poll_interval <sec.msec>
+                 entry_val <entry-val>
+                 entry_op {gt | ge | eq | ne | lt | le}
+                 entry_type {value | increment | rate}
+                 [exit_comb {or | and}]
+                 [exit_val <exit-val>
+                  exit_op {gt | ge | eq | ne | lt | le}
+                  exit_type {value | increment | rate}]
+                 [exit_time <sec.msec>]
+                 [exit_event {false | true}]
+                 [average_factor <average-factor-val>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        name 
+        parameter 
+        is_increment 
+        value 
+        delta_value 
+        exit_event 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] interface 
+                 name <interface-name>
+                 parameter <counter-name>
+                 poll-interval <sec.msec>
+                 entry-val <entry-val>
+                 entry-op {gt | ge | eq | ne | lt | le}
+                 entry-type {value | increment | rate}
+                 [exit-comb {or | and}]
+                 [exit-val <exit-val>
+                  exit-op {gt | ge | eq | ne | lt | le}
+                  exit-type {value | increment | rate}]
+                 [exit-time <sec.msec>]
+                 [exit-event {false | true}]
+                 [average-factor <average-factor-val>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_interface_name 
+        $_interface_parameter 
+        $_interface_is_increment 
+        $_interface_value 
+        $_interface_delta_value 
+        $_interface_exit_event 
+
+20   ioswdsysmon         01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_ioswd 
+                 [tag <tag-val>]
+                 [timewin <sec.msec>]
+                 [sub12_op {and | or | andnot}]
+                 sub1 <subevent-description> 
+                 [sub2 <subevent-description>]
+                 [queue_priority {normal | low | high | last}]
+                 [maxrun <sec.msec>] [nice {0 | 1}]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+                 where <subevent-description> can be one of
+                         cpu_proc 
+                         taskname <taskname-str>
+                         op {gt | ge | eq | ne | lt | le}
+                         val <value>
+                         period <sec.msec>
+
+                         mem_proc 
+                         taskname <taskname-str>
+                         op {gt | ge | eq | ne | lt | le}
+                         val <value> [is_percent {TRUE | FALSE}]
+                         period <sec.msec>
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        num_subs
+        node
+        sub1
+        sub2
+        path
+        procname
+        pid
+        taskname
+        present
+        type
+        taskname
+        taskid
+        value
+        sec
+        msec
+        is_percent (mem_proc event)
+        diff       (mem_proc event)
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] ioswd 
+                 [timewin <sec.msec>]
+                 [sub12-op {and | or | andnot}]
+                 sub1 <subevent-description>
+                 [sub2 <subevent-description>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+                 where <subevent-description> can be one of
+                         cpu-proc 
+                         taskname <taskname-str>
+                         op {gt | ge | eq | ne | lt | le}
+                         val <value>
+                         period <sec.msec>
+
+                         mem-proc 
+                         taskname <taskname-str>
+                         op {gt | ge | eq | ne | lt | le}
+                         val <value> [is-percent {TRUE | FALSE}]
+                         period <sec.msec>
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_ioswd_num_subs
+        $_ioswd_node
+        $_ioswd_sub[1-2]_path
+        $_ioswd_sub[1-2]_pid
+        $_ioswd_sub[1-2]_present
+        $_ioswd_sub[1-2]_type
+        $_ioswd_sub[1-2]_taskname
+        $_ioswd_sub[1-2]_value
+        $_ioswd_sub[1-2]_period
+        $_ioswd_sub[1-2]_is_percent (mem-proc event)
+        $_ioswd_sub[1-2]_diff       (mem-proc event)
+
+21   none                01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_none 
+                 [tag <tag-val>] 
+                 [sync {yes | no}] 
+                 [default <sec.msec>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        argc 
+        arg1 
+        arg2 
+        arg3 
+        arg4 
+        arg5 
+        arg6 
+        arg7 
+        arg8 
+        arg9 
+        arg10 
+        arg11 
+        arg12 
+        arg13 
+        arg14 
+        arg15 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] none 
+                 [sync {yes | no}] 
+                 [default <sec.msec>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_none_argc 
+        $_none_arg1 
+        $_none_arg2 
+        $_none_arg3 
+        $_none_arg4 
+        $_none_arg5 
+        $_none_arg6 
+        $_none_arg7 
+        $_none_arg8 
+        $_none_arg9 
+        $_none_arg10 
+        $_none_arg11 
+        $_none_arg12 
+        $_none_arg13 
+        $_none_arg14 
+        $_none_arg15 
+
+22   oir                 01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_oir 
+                 [tag <tag-val>] 
+                 [event {all | insert | removal}] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        event 
+        slot 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] oir 
+                 [event {all | insert | removal}] 
+                 [maxrun <sec.msec>] 
+                 [ratelimit <sec.msec>] 
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_oir_event 
+        $_oir_slot 
+
+23   snmp                01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_snmp 
+                 [tag <tag-val>] 
+                 oid <oid-val> 
+                 get_type {exact | next} 
+                 poll_interval <sec.msec>
+                 entry_op {gt | ge | eq | ne | lt | le} 
+                 entry_val <entry value>
+                 entry_type {value | increment | rate}
+                 [exit_comb {or | and}]
+                 [exit_op {gt | ge | eq | ne | lt | le}
+                  exit_val <exit value>
+                  exit_type {value | increment | rate}]
+                 [exit_time <sec.msec>]
+                 [exit_event {true | false}]
+                 [average_factor <average-factor-val>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        oid 
+        val
+        exit_event
+        delta_val
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] snmp 
+                 oid <oid-val>
+                 get-type {exact | next}
+                 poll-interval <sec.msec>
+                 entry-op {gt | ge | eq | ne | lt | le}
+                 entry-val <entry value>
+                 entry-type {value | increment | rate}
+                 [exit-comb {or | and}]
+                 [exit-op {gt | ge | eq | ne | lt | le}
+                  exit-val <exit value>
+                  exit-type {value | increment | rate}]
+                 [exit-time <sec.msec>]
+                 [exit-event {true | false}]
+                 [average-factor <average-factor-val>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_snmp_oid 
+        $_snmp_oid_val
+        $_snmp_oid_delta_val
+
+24   snmp-object         01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_snmp_object 
+                 oid <oid-val> 
+                 type {int | uint | counter | gauge | ipv4 | octet | string | oid | counter64} 
+                 sync {yes | no} skip {yes | no} 
+                 [istable {yes | no}] 
+                 [default <sec.msec>] 
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        oid 
+        request 
+        request_type 
+        value 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] snmp-object 
+                 oid <oid-val>
+                 type {int | uint | counter | gauge | ipv4 | octet | string | oid | counter64} 
+                 sync {yes | no}
+                 skip {yes | no}
+                 [istable {yes | no}]
+                 [default <sec.msec>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_snmp_oid 
+        $_snmp_request
+        $_snmp_request_type
+        $_snmp_value
+
+25   snmp-notification   01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_snmp_notification 
+                 [tag <tag-val>] 
+                 oid <oid-number>
+                 oid_val <oid-value>
+                 op {gt | ge | eq | ne | lt | le}
+                 [src_ip_address <source-ip-address>]
+                 [dest_ip_address <destination-ip-address>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+                 [default <sec.msec>]
+                 [direction {incoming | outgoing}]
+                 [msg_op {drop | send}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        oid 
+        oid_val
+        src_ip_addr
+        dest_ip_addr
+        x_x_x_x_x_x (varbinds)
+        trap_oid
+        ent_oid
+        gen_trap
+        spec_trap
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] snmp-notification 
+                 oid <oid-number>
+                 oid-val <oid-value>
+                 op {gt | ge | eq | ne | lt | le}
+                 [src-ip-address <source-ip-address>]
+                 [dest-ip-address <destination-ip-address>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [default <sec.msec>]
+                 [direction {incoming | outgoing}]
+                 [msg-op {drop | send}]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_snmp_notif_oid 
+        $_snmp_notif_oid_val
+        $_snmp_notif_src_ip_addr
+        $_snmp_notif_dest_ip_addr
+        $_x_x_x_x_x_x (varbinds)
+        $_snmp_notif_trap_oid
+        $_snmp_notif_ent_oid
+        $_snmp_notif_gen_trap
+        $_snmp_notif_spec_trap
+
+26   timer               01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_timer 
+                 {watchdog | countdown | absolute | cron}
+                 [tag <tag-val>] 
+                 name <timer-name>
+                 [cron_entry <cron string>] (for cron timer)
+                 [time <time-val>] (for other types of timer)
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        ::cisco::eem::event_register_timer_subscriber 
+                 {watchdog | countdown | absolute | cron} 
+                 [tag <tag-val>] 
+                 name <timer-name>
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>] [nice {0 | 1}] 
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        timer_type 
+        timer_time 
+        timer_time_sec 
+        timer_time_msec 
+        timer_remain 
+        timer_remain_sec 
+        timer_remain_msec 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] timer 
+                 {watchdog | countdown | absolute | cron}
+                 name <timer-name>
+                 [cron_entry <cron string>] (for cron timer)
+                 [time <time-val>] (for other types of timer)
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_timer_type 
+        $_timer_time 
+        $_timer_remain 
+
+27   nf                  01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_nf 
+                 [tag <tag-val>] 
+                 monitor_name <monitor-name value>
+                 event_type <create|update|delete>
+                 exit_event_type <create|update|delete>
+                 event1-event4 <subevent-description>
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+                 where <subevent-description> can be 
+                 field <field value>
+                 rate_interval <rate interval value> (event1 only)
+                 entry_value <entry value>
+                 entry_op {eq|ge|gt|le|lt|wc}
+                 [exit_value <exit value>]
+                 [exit_op {eq|ge|gt|le|lt|wc}]
+                 [exit_rate_interval <exit rate interval value>] (event1 only)
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        monitor_name 
+        event_type
+        ip_protocol
+        source_address
+        source_port
+        dest_address
+        dest_port
+        app_name
+        event[1-4]_field
+        event[1-4]_value
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] nf 
+                 monitor-name <monitor-name value>
+                 event-type <create|update|delete>
+                 exit-event-type <create|update|delete>
+                 event1-event4 <subevent-description>
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+                 where <subevent-description> can be 
+                 field <field value>
+                 rate-interval <rate interval value> (event1 only)
+                 entry-value <entry value>
+                 entry-op {eq|ge|gt|le|lt|wc}
+                 [exit-value <exit value>]
+                 [exit-op {eq|ge|gt|le|lt|wc}]
+                 [exit-rate-interval <exit rate interval value>] (event1 only)
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_nf_monitor_name 
+        $_nf_event_type
+        $_nf_ip_protocol
+        $_nf_source_address
+        $_nf_source_port
+        $_nf_dest_address
+        $_nf_dest_port
+        $_nf_app_name
+        $_nf_event[1-4]_field
+        $_nf_event[1-4]_value
+
+28   ipsla               01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_ipsla 
+                 [tag <tag-val>] 
+                 group_name <group-name value>
+                 operation_id <operation-id value>
+                 [reaction_type <reaction_type value>]
+                 [dest_ip_addr <destination-ip-address>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        group_name 
+        oper_id
+        condition
+        react_type
+        dest_ip_addr
+        threshold_rising
+        threshold_falling
+        threshold_count
+        threshold_count2
+        measured_threshold_value
+
+        Applet Configuration Syntax: 
+         [ no ] event [tag <tag-val>] ipsla 
+                 group-name <group-name value>
+                 operation-id <operation-id value>
+                 [reaction-type <reaction-type value>]
+                 [dest-ip-addr <destination-ip-address>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_ipsla_group_name 
+        $_ipsla_oper_id
+        $_ipsla_condition
+        $_ipsla_react_type
+        $_ipsla_threshold_type
+        $_ipsla_dest_ip_addr
+        $_ipsla_threshold_rising
+        $_ipsla_threshold_falling
+        $_ipsla_threshold_count
+        $_ipsla_threshold_count2
+        $_ipsla_measured_threshold_value
+
+29   rpc                 01.00     node0/0     RP      
+
+        Tcl Configuration Syntax: 
+        ::cisco::eem::event_register_rpc 
+                 [default <sec.msec>]
+                 [queue_priority {normal | low | high | last}] 
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+                 [nice {0 | 1}]
+
+        Tcl event_reqinfo Array Names: 
+        event_id
+        job_id
+        event_type
+        event_type_string
+        event_pub_time
+        event_pub_sec
+        event_pub_msec
+        event_trigger_num
+        event_severity
+        argc 
+        arg0 
+        arg1 
+        arg2 
+        arg3 
+        arg4 
+        arg5 
+        arg6 
+        arg7 
+        arg8 
+        arg9 
+        arg10 
+        arg11 
+        arg12 
+        arg13 
+        arg14 
+
+        Applet Configuration Syntax: 
+        [ no ] event [tag <tag-val>] rpc 
+                 [default <sec.msec>]
+                 [maxrun <sec.msec>]
+                 [ratelimit <sec.msec>]
+
+        Applet Built-in Environment Variables: 
+        $_event_id
+        $_job_id
+        $_event_type
+        $_event_type_string
+        $_event_pub_time
+        $_event_pub_sec
+        $_event_pub_msec
+        $_event_severity
+        $_rpc_argc 
+        $_rpc_arg0 
+        $_rpc_arg1 
+        $_rpc_arg2 
+        $_rpc_arg3 
+        $_rpc_arg4 
+        $_rpc_arg5 
+        $_rpc_arg6 
+        $_rpc_arg7 
+        $_rpc_arg8 
+        $_rpc_arg9 
+        $_rpc_arg10 
+        $_rpc_arg11 
+        $_rpc_arg12 
+        $_rpc_arg13 
+        $_rpc_arg14 
