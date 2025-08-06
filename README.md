@@ -52,8 +52,8 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 <ins>When building out an applet, there's a couple of really useful tools</ins>:   
 
 > **Tool 1 `sh event manager detector <...> detailed`**   
->> I have included the output of `sh event manager detector all detailed` in the file [sh_detector_all_detailed.txt]().   
->> But, you'll likely be most interested in the outupt of the following detectors:   
+>> I have included the output of `sh event manager detector all detailed` in the file [sh_detector_all_detailed.txt](https://github.com/plmcdowe/Cisco-and-EEM/blob/706ef6531086a391ff9773cd9d2e0275cb52cf44/sh_detector_all_detailed.txt).   
+>> But, you'll likely be most interested in the output of the following detectors:   
 >>> ```
 >>> cli                 CLI event detector
 >>> config              Config event detector
