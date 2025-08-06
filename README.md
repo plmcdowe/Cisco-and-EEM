@@ -198,7 +198,26 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 ## [ 2 ] **Examples**     
 > ### ↘️[ 2.1 ] <ins>CDP Neighbor</ins>:    
 >> **I extended the eem applet `cdp-update` from a Cisco Community post found [here](https://community.cisco.com/t5/networking-knowledge-base/automatically-set-port-descriptions/tac-p/3345176/highlight/true#M5362).**   
->> <b></b>
+>> - In my extended version   
+>> 1. Check if `cdp_capabilities_string` contains Switch or Router in `00.00`.   
+>> *If you're unsure about what to expect for any given device* - 
+>> find a switch on your network connected to a router, another switch, and an AP - then -
+>> send `sh cdp ne` and check out the legend for "Capability Codes" and how they correspond to devices.
+>>> ```
+>>> Capability Codes: R - Router, T - Trans Bridge, B - Source Route Bridge
+>>>                   S - Switch, H - Host, I - IGMP, r - Repeater, P - Phone, 
+>>>                   D - Remote, C - CVTA, M - Two-port Mac Relay 
+>>> ```   
+>>> 2. If it is, get the peer MAC in `01.00` and `01.02` storing the regex match in `MAC`   
+>>> 3. Check the `cdp_platform` for AP models in `01.03`   
+>>> 4. If it is either of those APs, lazy regex in `01.05` stores the name in `AP`
+>>> 5. `01.06 - 01.12` check the current int description.   
+>>> If the current description matches what would be configured, the eem exits.   
+>>> Otherwise, it configures the interface like, "Bld-14-Fl-2,d8cf" where `$AP,$MAC` are name and last 4 of MAC.   
+>>> 6. Starting at `02.00` we have if'd ourselves to the case where the neighbor is not an AP, but must be a switch or router.   
+>>> So, we pull in the hostname, cutting off the domain `.abc`, and store in `HOST`   
+>>> 7. `02.01` retreives the neighbor model and stores in `MOD`.
+>>>  
 >> <b></b>
 >> <b></b>
 >> ```
