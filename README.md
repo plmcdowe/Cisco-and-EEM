@@ -31,7 +31,7 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 
 **EEM Applet** `(config)#event manager applet AppletName`**:**    
 > Applets are the focus of this ReadMe.    
-> EEM 4.0 Applets use a TCL patch 8.3.4. You can confirm from CLI within the TCL shell:    
+> EEM 4.0 Applets use TCL patch 8.3.4. You can confirm from CLI within the TCL shell:    
 >> ```
 >> #tclsh
 >> (tcl)#info patchlevel
