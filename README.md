@@ -3,12 +3,13 @@
 I hope that this repository saves you lots of time.    
 Because, I found EEM documentation to be a special kind of awful.    
 Hand's down, the best resource is piecing things together from Cisco Community Forum posts.    
-I will provide links at the end to the resources that were most beneficial to me on this journey.   
-
+I'll provide links at the end (sometime) to the resources that were most beneficial to me on this journey.   
+   
+## [ 1 ] **Intro**     
 :warning:<ins>Caveats & Warnings</ins>:warning:     
 
 EEM's and AAA can be made to work together, but your `aaa new-model` is likely *not* configured for it.     
-> The guaranteed method is to configure your applets with `authorization bypass`.     
+> The guaranteed method is to configure your applets with `authorization bypass`     
 
 If you are using [IOS.sh](https://github.com/plmcdowe/Cisco-and-Bash):    
 > ***:exclamation: Do not attempt to run a function from within an EEM applet. :exclamation:***     
@@ -51,149 +52,150 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 
 <ins>When building out an applet, there's a couple of really useful tools</ins>:   
 
-> **Tool 1 `sh event manager detector <...> detailed`**   
->> **I have included the output of `sh event manager detector all detailed` in the file [sh_detector_all_detailed.txt](https://github.com/plmcdowe/Cisco-and-EEM/blob/706ef6531086a391ff9773cd9d2e0275cb52cf44/sh_detector_all_detailed.txt).**   
->> **But, you'll likely be most interested in the output of the following detectors:**   
->>> ```
->>> cli                 CLI event detector
->>> config              Config event detector
->>> env                 Environmental event detector
->>> generic             Generic event detector
->>> gold                GOLD event detector
->>> identity            Identity event detector
->>> interface           Interface event detector
->>> ioswdsysmon         Ioswdsysmon event detector
->>> ipsla               IPSLA event detector
->>> mat                 mac-address-table event detector
->>> neighbor-discovery  neighbor discovery event detector
->>> nhrp                NHRP event detector
->>> routing             Routing event detector
->>> snmp                Snmp event detector
->>> snmp-notification   Snmp notification event detector
->>> snmp-object         Snmp Object event detector
->>> syslog              Syslog event detector
->>> ```
->>>   
->> **And, as a relevant reference for the first example, here's the output of `sh event manager detector neighbor-discovery detailed`:**   
->>> ```
->>> No.  Name                Version   Node        Type    
->>> 1    neighbor-discovery  01.00     node0/0     RP      
->>> 
->>>         Tcl Configuration Syntax: 
->>>         ::cisco::eem::event_register_neighbor_discovery 
->>>                  [tag <tag-val>] 
->>>                  interface <interface-pattern> 
->>>                  [cdp {add | update | delete | all}] 
->>>                  [lldp {add | update | delete | all}]
->>>                  [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
->>>                  [line-event {up|down|all}] 
->>>                  [queue_priority {normal | low | high | last}] 
->>>                  [maxrun <sec.msec>]
->>>                  [ratelimit <sec.msec>]
->>>                  [nice {0 | 1}]
->>> 
->>>         Tcl event_reqinfo Array Names: 
->>>         event_id
->>>         job_id
->>>         event_type
->>>         event_type_string
->>>         event_pub_time
->>>         event_pub_sec
->>>         event_pub_msec
->>>         event_trigger_num
->>>         event_severity
->>>         COMMON VARIABLES: 
->>>         notification 
->>>         intf_linkstatus 
->>>         intf_linestatus 
->>>         local_intf_name 
->>>         short_local_intf_name 
->>>         port_id 
->>>         CDP EVENT VARIABLES: 
->>>         protocol 
->>>         proto_notif 
->>>         proto_new_entry 
->>>         cdp_entry_name 
->>>         cdp_hold_time 
->>>         cdp_mgmt_domain 
->>>         cdp_platform 
->>>         cdp_version 
->>>         cdp_capabilities_string 
->>>         cdp_capabilities_bits 
->>>         cdp_capabilities_bits_[0-31] 
->>>         LLDP EVENT VARIABLES: 
->>>         protocol 
->>>         proto_notif 
->>>         proto_new_entry 
->>>         lldp_chassis_id 
->>>         lldp_system_name 
->>>         lldp_system_description 
->>>         lldp_ttl 
->>>         lldp_port_description 
->>>         lldp_system_capabilities_string 
->>>         lldp_enabled_capabilities_string 
->>>         lldp_system_capabilities_bits 
->>>         lldp_enabled_capabilities_bits 
->>>         lldp_capabilities_bits 
->>>         lldp_capabilities_bit_[0-31] 
->>> 
->>>         Applet Configuration Syntax: 
->>>         [ no ] event [tag <tag-val>] neighbor-discovery 
->>>                  interface {<interface> | regexp <interface-pattern>} 
->>>                  [cdp {add | update | delete | all}] 
->>>                  [lldp {add | update | delete | all}] 
->>>                  [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
->>>                  [line-event {up|down|all}] 
->>>                  [maxrun <sec.msec>] 
->>>                  [ratelimit <sec.msec>] 
->>> 
->>>         Applet Built-in Environment Variables: 
->>>         $_event_id
->>>         $_job_id
->>>         $_event_type
->>>         $_event_type_string
->>>         $_event_pub_time
->>>         $_event_pub_sec
->>>         $_event_pub_msec
->>>         $_event_severity
->>>         COMMON VARIABLES: 
->>>         $_nd_notification 
->>>         $_nd_intf_linkstatus 
->>>         $_nd_intf_linestatus 
->>>         $_nd_local_intf_name 
->>>         $_nd_short_local_intf_name 
->>>         $_nd_port_id 
->>>         CDP EVENT VARIABLES: 
->>>         $_nd_protocol 
->>>         $_nd_proto_notif 
->>>         $_nd_proto_new_entry 
->>>         $_nd_cdp_entry_name 
->>>         $_nd_cdp_hold_time 
->>>         $_nd_cdp_mgmt_domain 
->>>         $_nd_cdp_platform 
->>>         $_nd_cdp_version 
->>>         $_nd_cdp_capabilities_string 
->>>         $_nd_cdp_capabilities_bits 
->>>         $_nd_cdp_capabilities_bits_[0-31] 
->>>         LLDP EVENT VARIABLES: 
->>>         $_nd_protocol 
->>>         $_nd_proto_notif 
->>>         $_nd_proto_new_entry 
->>>         $_nd_lldp_chassis_id 
->>>         $_nd_lldp_system_name 
->>>         $_nd_lldp_system_description 
->>>         $_nd_lldp_ttl 
->>>         $_nd_lldp_port_description 
->>>         $_nd_lldp_system_capabilities_string 
->>>         $_nd_lldp_enabled_capabilities_string 
->>>         $_nd_lldp_system_capabilities_bits 
->>>         $_nd_lldp_enabled_capabilities_bits 
->>>         $_nd_lldp_capabilities_bits 
->>>         $_nd_lldp_capabilities_bit_[0-31] 
->>> ```
+**Tool 1 `sh event manager detector <...> detailed`**   
+> **I have included the output of `sh event manager detector all detailed` in the file [sh_detector_all_detailed.txt](https://github.com/plmcdowe/Cisco-and-EEM/blob/706ef6531086a391ff9773cd9d2e0275cb52cf44/sh_detector_all_detailed.txt).**   
+> **But, you'll likely be most interested in the output of the following detectors:**   
+>> ```
+>> cli                 CLI event detector
+>> config              Config event detector
+>> env                 Environmental event detector
+>> generic             Generic event detector
+>> gold                GOLD event detector
+>> identity            Identity event detector
+>> interface           Interface event detector
+>> ioswdsysmon         Ioswdsysmon event detector
+>> ipsla               IPSLA event detector
+>> mat                 mac-address-table event detector
+>> neighbor-discovery  neighbor discovery event detector
+>> nhrp                NHRP event detector
+>> routing             Routing event detector
+>> snmp                Snmp event detector
+>> snmp-notification   Snmp notification event detector
+>> snmp-object         Snmp Object event detector
+>> syslog              Syslog event detector
+>> ```
+>>   
+> **And, as a relevant reference for the first example, here's the output of `sh event manager detector neighbor-discovery detailed`:**   
+>> ```
+>> No.  Name                Version   Node        Type    
+>> 1    neighbor-discovery  01.00     node0/0     RP      
+>> 
+>>         Tcl Configuration Syntax: 
+>>         ::cisco::eem::event_register_neighbor_discovery 
+>>                  [tag <tag-val>] 
+>>                  interface <interface-pattern> 
+>>                  [cdp {add | update | delete | all}] 
+>>                  [lldp {add | update | delete | all}]
+>>                  [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
+>>                  [line-event {up|down|all}] 
+>>                  [queue_priority {normal | low | high | last}] 
+>>                  [maxrun <sec.msec>]
+>>                  [ratelimit <sec.msec>]
+>>                  [nice {0 | 1}]
+>> 
+>>         Tcl event_reqinfo Array Names: 
+>>         event_id
+>>         job_id
+>>         event_type
+>>         event_type_string
+>>         event_pub_time
+>>         event_pub_sec
+>>         event_pub_msec
+>>         event_trigger_num
+>>         event_severity
+>>         COMMON VARIABLES: 
+>>         notification 
+>>         intf_linkstatus 
+>>         intf_linestatus 
+>>         local_intf_name 
+>>         short_local_intf_name 
+>>         port_id 
+>>         CDP EVENT VARIABLES: 
+>>         protocol 
+>>         proto_notif 
+>>         proto_new_entry 
+>>         cdp_entry_name 
+>>         cdp_hold_time 
+>>         cdp_mgmt_domain 
+>>         cdp_platform 
+>>         cdp_version 
+>>         cdp_capabilities_string 
+>>         cdp_capabilities_bits 
+>>         cdp_capabilities_bits_[0-31] 
+>>         LLDP EVENT VARIABLES: 
+>>         protocol 
+>>         proto_notif 
+>>         proto_new_entry 
+>>         lldp_chassis_id 
+>>         lldp_system_name 
+>>         lldp_system_description 
+>>         lldp_ttl 
+>>         lldp_port_description 
+>>         lldp_system_capabilities_string 
+>>         lldp_enabled_capabilities_string 
+>>         lldp_system_capabilities_bits 
+>>         lldp_enabled_capabilities_bits 
+>>         lldp_capabilities_bits 
+>>         lldp_capabilities_bit_[0-31] 
+>> 
+>>         Applet Configuration Syntax: 
+>>         [ no ] event [tag <tag-val>] neighbor-discovery 
+>>                  interface {<interface> | regexp <interface-pattern>} 
+>>                  [cdp {add | update | delete | all}] 
+>>                  [lldp {add | update | delete | all}] 
+>>                  [link-event {down|goingdown|init|testing|up|reset|admindown|deleted|all}] 
+>>                  [line-event {up|down|all}] 
+>>                  [maxrun <sec.msec>] 
+>>                  [ratelimit <sec.msec>] 
+>> 
+>>         Applet Built-in Environment Variables: 
+>>         $_event_id
+>>         $_job_id
+>>         $_event_type
+>>         $_event_type_string
+>>         $_event_pub_time
+>>         $_event_pub_sec
+>>         $_event_pub_msec
+>>         $_event_severity
+>>         COMMON VARIABLES: 
+>>         $_nd_notification 
+>>         $_nd_intf_linkstatus 
+>>         $_nd_intf_linestatus 
+>>         $_nd_local_intf_name 
+>>         $_nd_short_local_intf_name 
+>>         $_nd_port_id 
+>>         CDP EVENT VARIABLES: 
+>>         $_nd_protocol 
+>>         $_nd_proto_notif 
+>>         $_nd_proto_new_entry 
+>>         $_nd_cdp_entry_name 
+>>         $_nd_cdp_hold_time 
+>>         $_nd_cdp_mgmt_domain 
+>>         $_nd_cdp_platform 
+>>         $_nd_cdp_version 
+>>         $_nd_cdp_capabilities_string 
+>>         $_nd_cdp_capabilities_bits 
+>>         $_nd_cdp_capabilities_bits_[0-31] 
+>>         LLDP EVENT VARIABLES: 
+>>         $_nd_protocol 
+>>         $_nd_proto_notif 
+>>         $_nd_proto_new_entry 
+>>         $_nd_lldp_chassis_id 
+>>         $_nd_lldp_system_name 
+>>         $_nd_lldp_system_description 
+>>         $_nd_lldp_ttl 
+>>         $_nd_lldp_port_description 
+>>         $_nd_lldp_system_capabilities_string 
+>>         $_nd_lldp_enabled_capabilities_string 
+>>         $_nd_lldp_system_capabilities_bits 
+>>         $_nd_lldp_enabled_capabilities_bits 
+>>         $_nd_lldp_capabilities_bits 
+>>         $_nd_lldp_capabilities_bit_[0-31] 
+>> ```
 >>    
-> **Tool 2: `debug event manager [ action cli | detector <...> ]`**   
-> 
+**Tool 2: `debug event manager [ action cli | detector <...> ]`**   
+> Enable `term mon` then watch the debug output!
+> Can't stress enough how helpful debugging EEM is, especially for the various detectors.    
 
 ## [ 2 ] **Examples**     
 > ### ↘️[ 2.1 ] <ins>CDP Neighbor</ins>:    
@@ -211,6 +213,12 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 >> 6. Starting at `02.00` we have if'd ourselves to the case where the neighbor is not an AP, but must be a switch or router.   
 >> So, we pull in the hostname, cutting off the domain `.abc`, and store in `HOST`   
 >> 7. `02.01` retreives the neighbor model and stores in `MOD`.
+>> 8. `02.02 - 02.08` is prefixing the appropriate interface speed based on the `$_nd_port_id`
+>> 9. `02.11 - 02.14` is retrieving the last 2 octects of the neighbor's IP in the management network range, and storing in the variable `IP`
+>> 10. `02.15 - 02.21` is checking the interface's current description and `exit` if the current description matches what would be configured.
+>> 11. `02.22 - 02.25` is checking if the interface description contains Po# for Port Channel, and `exit` if it does.
+>> 12. `02.26 - 02.27` configures the interface which has a neighbor in the managment network and does not contain Po in its description with: `description \$IP,\$INT,\$MOD,\$MAC`
+>> 13. `02.28 - 02.42` else, the neighbor IP is not in the management network (ex: cdp discovered a router by a subinterface IP), then configure with `\$HOST,\$INT,\$MOD,\$MAC`   
 >>  
 >> <b></b>
 >> <b></b>
