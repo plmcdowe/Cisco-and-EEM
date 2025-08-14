@@ -293,3 +293,66 @@ Key terms involved: *"EEM Applet"* and *"EEM Policy"*, *"TCL.sh"* and *"IOS.sh"*
 >> action 02.43 cli command "do write"
 >> action 02.44 end
 >> ```
+>>
+> ### ↘️[ 2.2 ] <ins>DMVPN Tunnel Interface modification</ins>:
+> I made this EEM as part of my team's routing overhaul.
+>     
+>> Big picture summary, we overhauled OSPFv2 - VRF/GRE - DMVPN/IPSEC routes and crypto.
+>> - ikev2 encryption on aes-cbc-256 with sha256 integrity;
+>> - ospf key chain on hmac-sha-256;
+>> - with the new ipsec profile applied to a new gre multipoint vrf.
+>>      
+>> All of these config changes were staged without service interuption because Hub-Spoke was established on existing tunnels/vrf's assigned to each site's external interface.    
+>> But, when it came time to "flip the switch" and reconfigure the external interfaces with membership to the refreshed vrf,    
+>> we elected to use EEM because the configuration would complete independent of losing connectivity (SSH and TACACS command authz).    
+>>
+>> `action 00.10 - 00.15` uses `cdp ne` to determine which RTR interface is connected to the SW. (Internal Interface `$IntInt`).    
+>> `action 01.00` is the event that Gig 0/0/0 is the external interface.    
+>> `action 02.00` is the event that Gig 0/0/1 is the external interface.    
+>> In either event, actions `0[1|2].05 - 0[1|2].55`:    
+>> - retrieve and store the configured external IP because assigning the new VRF will remove the IP configured on the external interface.    
+>> - applies the new VRF    
+>> - reconfigures the external IP    
+>> - interfaces the old tunnel and shuts it    
+>> - interfaces the new tunnel and no shuts it    
+>>     
+>> ```ruby
+>> event manager applet DMVPN authorization bypass
+>> event cli pattern ".*25DMVPN.*" enter
+>>  action 00.00 cli command "enable"
+>>  action 00.10 cli command "sh cdp ne | i Gig"
+>>  action 00.15 regexp "(Gig 0/0/[0-1])" "\$_cli_result" match IntInt
+>>  action 01.00 if "\$IntInt" eq "Gig 0/0/1"
+>>  action 01.05 cli command "sh run int Gi0/0/0 | i ip_address"
+>>  action 01.10 regexp "ip.address.([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+).(255.255.[0-9]+.[0-9]+)" "\$_cli_result" match IP MASK
+>>  action 01.15 cli command "conf t"
+>>  action 01.20 cli command "int Gi0/0/0"
+>>  action 01.25 cli command "vrf forwarding DMVPNVRF"
+>>  action 01.30 cli command "ip address \$IP \$MASK"
+>>  action 01.35 cli command "interface Tunnel20"
+>>  action 01.40 cli command "shutdown"
+>>  action 01.45 cli command "interface Tunnel25"
+>>  action 01.50 cli command "no shutdown"
+>>  action 01.55 cli command "end"
+>>  action 01.60 end
+>>  action 02.00 if "\$IntInt" eq "Gig 0/0/0"
+>>  action 02.05 cli command "sh run int Gi0/0/1 | i ip_address"
+>>  action 02.10 regexp "ip.address.([0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+).(255.255.255.[0-9]+)" "\$_cli_result" match IP MASK
+>>  action 02.15 cli command "conf t"
+>>  action 02.20 cli command "int Gi0/0/1"
+>>  action 02.25 cli command "vrf forwarding DMVPNVRF"
+>>  action 02.30 cli command "ip address \$IP \$MASK"
+>>  action 02.35 cli command "interface Tunnel20"
+>>  action 02.40 cli command "shutdown"
+>>  action 02.45 cli command "interface Tunnel25"
+>>  action 02.50 cli command "no shutdown"
+>>  action 02.60 cli command "end"
+>>  action 02.65 end
+>>  action 99.00 set _exit_status "0"
+>> ```
+>
+> And, that's how we updated over 60 sites.     
+> An additional EEM could have monitored for connectivity and reverted configs if not re-established in a certain timeframe.   
+> But, with positive test results, we were confident in the config.    
+> Also, the EEM could have been triggered with an ntp time-based `event` instead of our hackey `cli pattern ".*25DMVPN.*"`    
+> But, with SecureCRT it was just as easy to throw togther a VBScript that hammered through a RTR IP list and sent `25DMVPN` to trigger the EEM.   
